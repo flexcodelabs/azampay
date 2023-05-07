@@ -1,0 +1,56 @@
+name: Publish to NPM
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: set global attributes
+        run: |
+          git config --global user.email "neicoreadams@gmail.com"
+          git config --global user.name "neicore"
+          git remote set-url origin https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ github.repository }}
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies and build 🔧
+        run: npm install && npm run prebuild && npm run build
+      - name: Publish package on NPM 📦
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # update version
+      - name: install jq
+        run: |
+          sudo apt-get update 
+          sudo apt-get -y install jq
+          
+      - name: get version
+        run: |
+          PACKAGE_VERSION=$(cat ./package.json | jq '.version' | tr -d '"') 
+          echo "::set-output name=PACKAGE_VERSION::$(cat ./package.json | jq '.version' | tr -d '"')"
+        id: version
+      - name: bump-version
+        id: bump_version
+        uses: flexcodelabs/bump-version@0.0.2
+        with: 
+          GITHUB_TOKEN: ${{secrets.TOKEN}}
+          PACKAGE_VERSION: ${{ steps.version.outputs.PACKAGE_VERSION }}
+          DELETE_BRANCH: false
+          CHANGELOG_PATH: ./CHANGELOG.md
+          PACKAGE_JSON_PATH: ./package.json
+      # Commit and push the latest version
+      - name: update main branch
+        run: |
+          git add ./package.json
+          git add ./CHANGELOG.md
+          git commit -m "Skip CI"
+          git push
