@@ -10,7 +10,7 @@
   "scripts": {
     "prebuild": "rm -rf dist && npm run clean",
     "build": "tsc && rm -rf ./lib/test && cp -r ./lib/src/* ./lib/ && rm -rf ./lib/src",
-    "package": "npm run build && ncc build --source-map --license licenses.txt  && cd ./lib && find . -name '*.js' -type f -delete && cd ../ && cp -r ./lib/* ./dist/",
+    "package": "npm run build && ncc build --license licenses.txt  && cd ./lib && find . -name '*.js' -type f -delete && cd ../ && cp -r ./lib/* ./dist/ && rm -rf ./lib && mv dist lib",
     "clean": "rm -rf ./lib/",
     "cm": "cz",
     "release": "npm run build && npm publish",

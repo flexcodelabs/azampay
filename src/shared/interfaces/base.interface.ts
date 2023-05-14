@@ -58,7 +58,7 @@ export interface TokenResponse {
   postCheckout?: (
     payload: PostCheckOut,
     options?: RequestOptions
-  ) => Promise<string>;
+  ) => Promise<PostCheckOutInterface>;
 
   /**
    * @method disburse A method used to lookup the name associated with a bank account or Mobile Money account.
