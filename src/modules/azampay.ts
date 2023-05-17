@@ -186,7 +186,7 @@ export class AzamPay {
       const { data } = await axios.get(
         `${
           CHECKOUT[this.instance?.env ?? options?.env ?? 'SANDBOX']
-        }{BaseUrl}/api/v1/Partner/GetPaymentPartners`,
+        }/api/v1/Partner/GetPaymentPartners`,
         {
           headers: {
             ...this.headers,
