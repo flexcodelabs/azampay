@@ -65,10 +65,10 @@ const azampay = require('azampay').default
 | Property     | Description                                                          | Type   | Required |
 | ------------ | -------------------------------------------------------------------- | ------ | -------- |
 | env          | Enum: SANDBOX \| LIVE. Azampay environment. Default SANDBOX          | String | [ ]      |
-| clientId     | It will be the client id generated during application registration.  | String | [ x ]    |
-| appName      | It will be the name of application.                                  | String | [ x ]    |
-| clientSecret | It will be the secret key generated during application registration. | String | [ x ]    |
-| apiKey       | Azam Pay API key given as token in the settings page.                | String | [ x ]    |
+| clientId     | It will be the client id generated during application registration.  | String | [x]      |
+| appName      | It will be the name of application.                                  | String | [x]      |
+| clientSecret | It will be the secret key generated during application registration. | String | [x]      |
+| apiKey       | Azam Pay API key given as token in the settings page.                | String | [x]      |
 
 `Request Payload`
 
