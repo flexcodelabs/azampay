@@ -7,6 +7,7 @@ import {
   AzamPayInstance,
   AzamPayToken,
   ErrorResponse,
+  PartnersResponse,
   PostCheckOutInterface,
 } from '../shared/interfaces/base.interface';
 import {
@@ -31,7 +32,7 @@ https.globalAgent.options.rejectUnauthorized = false;
 export class AzamPay {
   constructor(private instance?: AzamPayInstance) {}
 
-  headers = {
+  private headers = {
     'Content-Type': 'application/json',
   };
 
@@ -116,17 +117,30 @@ export class AzamPay {
   };
 
   /**
-   * @method nameLookup This method allows for the transfer of money from other countries to Tanzania. It requires the authorization token generated above, passed as a header in the request. The request should also contain details of the source, destination, and transfer details. Additionally, the request can include an external reference ID and remarks.
-   * @param payload Disburse payload.
+   * @method partners. A method used to retrieve payment partners from Azam Pay
+   * @returns PartnersResponse
+   */
+
+  partners = async (
+    options?: RequestOptions
+  ): Promise<PartnersResponse | ErrorResponse> => {
+    return await this.getPartners(options);
+  };
+
+  /**
+   * @method nameLookup This API is used to lookup the name associated with a bank account or Mobile Money account.
+   * @param payload NameLookup payload.
    * @param options Request options for any additional options or independent request methods.
    * @returns NameLookupResponse or ErrorResponse
    */
+
   nameLookup = async (
     payload: NameLookup,
     options?: RequestOptions
   ): Promise<NameLookupResponse | ErrorResponse> => {
     return await this.getNameLookup(payload, options);
   };
+
   /**
    * @method disburse This method allows for the transfer of money from other countries to Tanzania. It requires the authorization token generated above, passed as a header in the request. The request should also contain details of the source, destination, and transfer details. Additionally, the request can include an external reference ID and remarks.
    * @param payload Disburse payload.
@@ -161,6 +175,28 @@ export class AzamPay {
         }
       );
       return { ...data, success: true } as TransactionStatusResponse;
+    } catch (e) {
+      return sanitizeErrorResponse(e as AxiosError);
+    }
+  };
+  private getPartners = async (
+    options?: RequestOptions
+  ): Promise<PartnersResponse | ErrorResponse> => {
+    try {
+      const { data } = await axios.get(
+        `${
+          CHECKOUT[this.instance?.env ?? options?.env ?? 'SANDBOX']
+        }{BaseUrl}/api/v1/Partner/GetPaymentPartners`,
+        {
+          headers: {
+            ...this.headers,
+            Authorization: `Bearer ${
+              this.instance?.accessToken ?? options?.accessToken ?? ''
+            }`,
+          },
+        }
+      );
+      return { partners: data, success: true } as PartnersResponse;
     } catch (e) {
       return sanitizeErrorResponse(e as AxiosError);
     }
@@ -277,7 +313,7 @@ export class AzamPay {
         }/api/v1/Partner/PostCheckout`,
         payload
       );
-      return { ...data, success: true } as PostCheckOutInterface;
+      return { data, success: true } as PostCheckOutInterface;
     } catch (e) {
       return sanitizeErrorResponse(e as AxiosError);
     }

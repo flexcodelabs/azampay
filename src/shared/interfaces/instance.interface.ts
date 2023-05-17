@@ -10,17 +10,17 @@ export interface TokenPayload {
   appName: string;
 
   /**
-   * @string It will be the client id which generated during application registration..
+   * @string It will be the client id generated during application registration.
    */
   clientId: string;
 
   /**
-   * @string It will be the secret key which generated during application registration.
+   * @string It will be the secret key generated during application registration.
    */
   clientSecret: string;
 
   /**
-   * @string AzamPayInstance Azam Pay API key given as token in the settings page.
+   * @string Azam Pay API key given as token in the settings page.
    */
   apiKey: string;
 
@@ -195,7 +195,7 @@ export interface PostCheckOut {
   externalId: string;
 
   /**
-   * @string URL which the request is being originated
+   * @string The URL where the request is originating
    */
   requestOrigin: string;
 
@@ -338,17 +338,17 @@ export interface TransferDetails {
 
 export interface DisburseResponse {
   /**
-   * @string Data stating whether disbursement was successsful or not
+   * @string A string containing the status of the transaction.
    */
   data: string;
 
   /**
-   * @string A message stating whether disbursement was successsful or not
+   * @string A string containing a human-readable message describing the response.
    */
   message: string;
 
   /**
-   * @boolean A boolean to show if the request was successful or not
+   * @boolean A boolean indicating whether the request was successful or not.
    */
   success: boolean;
 

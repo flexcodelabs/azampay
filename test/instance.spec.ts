@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-dotenv.config();
 import azampay from '../src';
 import {
   ErrorResponse,
@@ -7,10 +6,11 @@ import {
 } from '../src/shared/interfaces/base.interface';
 import {
   BankCheckout,
-  MnoCheckout,
   DisburseConstant,
+  MnoCheckout,
   PostCheckout,
 } from './constants/instance.constants';
+dotenv.config();
 jest.setTimeout(300000);
 
 /**

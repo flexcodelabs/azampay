@@ -86,6 +86,67 @@ export interface TokenResponse {
     payload: NameLookup,
     options?: RequestOptions
   ) => Promise<NameLookupResponse>;
+
+  /**
+   * @method partners A method to retrieve payment partner
+   */
+
+  partners: (options?: RequestOptions) => Promise<PartnersResponse>;
+}
+
+/**
+ * @interface Partners Payment partners
+ */
+export interface Partners {
+  /**
+   * @string Payment Partner logo URL
+   */
+  logoUrl: string;
+
+  /***
+   * @string Name of the payment partner e.g (Azampesa, Airtel, Halopesa, Tigopesa, vodacom)
+   */
+  partnerName: string;
+
+  /**
+   * @string Provider enum value e.g (airtel=2, tigo=3, halopesa=4, azampesa=5, Mpesa=10)
+   */
+  provider: number;
+
+  /**
+   * @string Name of the vendor
+   */
+  vendorName: string;
+
+  /**
+   * @string Unique id for payment vendor
+   */
+  paymentVendorId: string;
+
+  /**
+   * @string Unique id for payment partner
+   */
+  paymentPartnerId: string;
+
+  /**
+   * @string Currency code that will convert amount into specific currency format
+   */
+  currency: string;
+}
+
+/**
+ * @interface PartnersResponse
+ */
+export interface PartnersResponse {
+  /**
+   * @boolean A boolean value indicating if the request was successful or not.
+   */
+  success: boolean;
+
+  /**
+   * @interface Partners An array of payment partners
+   */
+  partners: Partners[];
 }
 
 /**
@@ -188,6 +249,8 @@ export interface ErrorResponse {
     options?: RequestOptions
   ) => Promise<NameLookupResponse>;
   transactionId?: string;
+
+  partners?: (options?: RequestOptions) => Promise<PartnersResponse[]>;
 }
 export interface AzamPayErrors {
   [key: string]: unknown;
@@ -300,7 +363,7 @@ export interface PostCheckOutInterface {
   /**
    * @string This is the status message of checkout request.
    */
-  message: unknown;
+  data: string;
 
   /**
    * @boolean A boolean value indicating if the request was successful or not.

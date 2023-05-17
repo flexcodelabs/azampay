@@ -1,6 +1,6 @@
 {
   "name": "azampay",
-  "version": "0.0.0",
+  "version": "0.0.0-beta",
   "description": "Azampay NodeJs SDK to help you interact with Azampay API",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -10,10 +10,10 @@
   "scripts": {
     "prebuild": "rm -rf dist && npm run clean",
     "build": "tsc && rm -rf ./lib/test && cp -r ./lib/src/* ./lib/ && rm -rf ./lib/src",
-    "package": "npm run build && ncc build --license licenses.txt  && cd ./lib && find . -name '*.js' -type f -delete && cd ../ && cp -r ./lib/* ./dist/ && rm -rf ./lib && mv dist lib",
+    "package": "npm run build -m && ncc build && cd ./lib && find . -name '*.js' -type f -delete && cd ../ && cp -r ./lib/* ./dist/ && rm -rf ./lib && mv dist lib",
     "clean": "rm -rf ./lib/",
     "cm": "cz",
-    "release": "npm run build && npm publish",
+    "release": "npm run package && npm publish",
     "lint": "eslint ./src/ --fix",
     "prepare": "husky install",
     "semantic-release": "semantic-release",

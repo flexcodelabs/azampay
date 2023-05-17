@@ -1,4 +1,7 @@
-import { TokenResponse } from '../shared/interfaces/base.interface';
+import {
+  ErrorResponse,
+  TokenResponse,
+} from '../shared/interfaces/base.interface';
 import { TokenPayload } from '../shared/interfaces/instance.interface';
 import { AzamPay } from './azampay';
 
@@ -9,7 +12,7 @@ import { AzamPay } from './azampay';
  */
 export const getToken = async (
   payload: TokenPayload
-): Promise<TokenResponse> => {
+): Promise<TokenResponse | ErrorResponse> => {
   const token = await AzamPay.getToken(payload);
   if (token.success) {
     const azamPay = new AzamPay({
@@ -25,6 +28,7 @@ export const getToken = async (
       disburse: azamPay.disburse,
       transactionStatus: azamPay.transactionStatus,
       nameLookup: azamPay.nameLookup,
+      partners: azamPay.partners,
     } as TokenResponse;
   }
   return token as TokenResponse;
