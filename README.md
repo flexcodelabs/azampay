@@ -36,7 +36,7 @@ npm i azampay
 
 ```JS
 
-import azampay from azampay
+import azampay from 'azampay'
 
 ```
 
