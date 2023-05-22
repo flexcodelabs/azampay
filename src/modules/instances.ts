@@ -1,8 +1,8 @@
 import {
   ErrorResponse,
   TokenResponse,
+  TokenPayload,
 } from '../shared/interfaces/base.interface';
-import { TokenPayload } from '../shared/interfaces/instance.interface';
 import { AzamPay } from './azampay';
 
 /**

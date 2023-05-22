@@ -1,4 +1,3 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 import axios, { AxiosError } from 'axios';
 import * as https from 'https';
 import { AUTHENTICATOR, CHECKOUT } from '../shared/enums/azampay.enum';
@@ -9,8 +8,6 @@ import {
   ErrorResponse,
   PartnersResponse,
   PostCheckOutInterface,
-} from '../shared/interfaces/base.interface';
-import {
   BankCheckout,
   CheckoutResponse,
   Disburse,
@@ -23,7 +20,8 @@ import {
   TokenPayload,
   TransactionStatus,
   TransactionStatusResponse,
-} from '../shared/interfaces/instance.interface';
+} from '../shared/interfaces/base.interface';
+
 https.globalAgent.options.rejectUnauthorized = false;
 
 /**
@@ -56,7 +54,7 @@ export class AzamPay {
           clientSecret: payload.clientSecret,
         }
       );
-      return { ...data, success: true } as AzamPayToken;
+      return { ...data, success: true, statusCode: 200 } as AzamPayToken;
     } catch (e) {
       return sanitizeErrorResponse(e as AxiosError);
     }
@@ -174,7 +172,11 @@ export class AzamPay {
           },
         }
       );
-      return { ...data, success: true } as TransactionStatusResponse;
+      return {
+        ...data,
+        success: true,
+        statusCode: 200,
+      } as TransactionStatusResponse;
     } catch (e) {
       return sanitizeErrorResponse(e as AxiosError);
     }
@@ -221,7 +223,7 @@ export class AzamPay {
           },
         }
       );
-      return { ...data, success: true } as NameLookupResponse;
+      return { ...data, success: true, statusCode: 200 } as NameLookupResponse;
     } catch (e) {
       return sanitizeErrorResponse(e as AxiosError);
     }
@@ -245,7 +247,7 @@ export class AzamPay {
           },
         }
       );
-      return { ...data, success: true } as DisburseResponse;
+      return { ...data, success: true, statusCode: 200 } as DisburseResponse;
     } catch (e) {
       return sanitizeErrorResponse(e as AxiosError);
     }
@@ -271,7 +273,7 @@ export class AzamPay {
           },
         }
       );
-      return { ...data, success: true } as CheckoutResponse;
+      return { ...data, success: true, statusCode: 200 } as CheckoutResponse;
     } catch (e) {
       return sanitizeErrorResponse(e as AxiosError);
     }
@@ -296,7 +298,7 @@ export class AzamPay {
           },
         }
       );
-      return { ...data, success: true } as CheckoutResponse;
+      return { ...data, success: true, statusCode: 200 } as CheckoutResponse;
     } catch (e) {
       return sanitizeErrorResponse(e as AxiosError);
     }
