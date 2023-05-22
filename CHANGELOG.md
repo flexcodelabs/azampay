@@ -10,3 +10,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Added
 
 - Release first major version of the SDK
+
+[0.0.1] - 2023-05-19
+
+Added
+
+- Partners method to get payment partners
+
+Changed
+
+- Improve README to include new methods
+
+[0.0.2] - 2023-05-23
+
+Added
+
+- Add status code to all successful requests
+
+Changed
+
+- Move all interfaces to shared base interface for import in external packages
