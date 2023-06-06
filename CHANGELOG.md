@@ -30,3 +30,9 @@ Added
 Changed
 
 - Move all interfaces to shared base interface for import in external packages
+
+[0.0.3] - 2023-06-06
+
+Changed
+
+- Change urls for live

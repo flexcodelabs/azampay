@@ -1,6 +1,6 @@
 {
   "name": "azampay",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Azampay NodeJs SDK to help you interact with Azampay API",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
