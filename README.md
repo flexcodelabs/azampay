@@ -9,7 +9,7 @@ AzamPay NodeJs SDK to help you easily and seamlessly integrate with Azampay APIs
    2.1 [Get Token](#get-token) <br>
    2.2 [Bank Checkout](#bank-checkout) <br>
    2.3 [Mno Checkout](#mno-checkout) <br>
-   2.4 [Disbursement](#disburse) <br>
+   2.4 [Disbursement](#disbursement) <br>
    2.5 [Name Lookup](#name-lookup) <br>
    2.6 [Transaction Status](#transaction-status) <br>
    2.7 [Post Checkout](#post-checkout) <br>
@@ -537,7 +537,7 @@ This end point will respond back with the URL of your payments. Merchant Applica
 
 ```
 
-`Descriptio`
+`Description`
 
 | Property           | Description                                                 | Type   |
 | ------------------ | ----------------------------------------------------------- | ------ |

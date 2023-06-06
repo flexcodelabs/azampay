@@ -1,11 +1,11 @@
 export enum AUTHENTICATOR {
   SANDBOX = 'https://authenticator-sandbox.azampay.co.tz',
-  LIVE = 'https://www.azampay.com',
+  LIVE = 'https://authenticator.azampay.co.tz',
 }
 
 export enum CHECKOUT {
-  SANDBOX = 'https://sandbox.azampay.co.tZ',
-  LIVE = 'https://www.azampay.com',
+  SANDBOX = 'https://sandbox.azampay.co.tz',
+  LIVE = 'https://checkout.azampay.co.tz',
 }
 
 export enum REQUESTMETHODS {

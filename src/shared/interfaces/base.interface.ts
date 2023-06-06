@@ -437,7 +437,7 @@ export interface TransactionStatusResponse {
 }
 
 /**
- * @interface TransactionStatus Interface for status method that allws you to retrieve the status of a disbursement transaction made through AzamPay.
+ * @interface TransactionStatus Interface for status method that allows you to retrieve the status of a disbursement transaction made through AzamPay.
  */
 export interface TransactionStatus {
   /**
@@ -653,7 +653,7 @@ export interface ErrorResponse {
   /**
    * @string Response code.
    */
-  code: string;
+  code?: string;
 
   /**
    * @number Response Http Status code.

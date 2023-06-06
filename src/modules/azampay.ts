@@ -198,7 +198,11 @@ export class AzamPay {
           },
         }
       );
-      return { partners: data, success: true } as PartnersResponse;
+      return {
+        partners: data,
+        success: true,
+        statusCode: 200,
+      } as PartnersResponse;
     } catch (e) {
       return sanitizeErrorResponse(e as AxiosError);
     }
@@ -315,7 +319,7 @@ export class AzamPay {
         }/api/v1/Partner/PostCheckout`,
         payload
       );
-      return { data, success: true } as PostCheckOutInterface;
+      return { data, success: true, statusCode: 200 } as PostCheckOutInterface;
     } catch (e) {
       return sanitizeErrorResponse(e as AxiosError);
     }
