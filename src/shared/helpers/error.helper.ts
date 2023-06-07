@@ -47,9 +47,16 @@ const sanitizedAxiosError = (
       ...serverError?.response?.data,
       message: ErrorMessage(
         serverError?.response?.data?.errors ??
-          ([serverError?.response?.statusText ?? error.message] as any)
+          ([
+            serverError?.response?.data?.message ??
+              serverError?.response?.statusText ??
+              error.message,
+          ] as any)
       ),
-      error: serverError?.response?.statusText ?? error.message,
+      error:
+        serverError?.response?.data?.message ??
+        serverError?.response?.statusText ??
+        error.message,
       code: serverError?.code || 'FAILED',
       statusCode: serverError?.response?.status || 400,
       success: false,
@@ -61,7 +68,8 @@ const sanitizedAxiosError = (
   return {
     ...error,
     success: false,
-    message: error.response?.statusText ?? error?.message,
+    message:
+      serverError?.message ?? error.response?.statusText ?? error?.message,
     error: error.response?.statusText ?? error?.message,
     statusCode: error.response?.status ?? 400,
     code: serverError?.code || 'FAILED',

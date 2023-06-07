@@ -36,3 +36,9 @@ Changed
 Changed
 
 - Change urls for live
+
+[0.0.4] - 2023-06-07
+
+Added
+
+- Improvement in error response messages
